@@ -1,6 +1,6 @@
 const Birthday = () => {
   return (
-    <div className="bg-pink-300 h-screen">
+    <div className="bg-pink-200 h-screen text-black flex flex-col justify-center items-center">
       <BirthdayList />
     </div>
   );
@@ -15,31 +15,59 @@ const birthdayPeople = [
     name: "Bertie Yates",
     age: "29 years",
   },
+  {
+    id: 2,
+    img: "/profile img2.jpg",
+    name: "Hester Hogan",
+    age: "32 years",
+  },
+  {
+    id: 3,
+    img: "/profile img3.jpg",
+    name: "Larry Little",
+    age: "36 years",
+  },
+  {
+    id: 4,
+    img: "/profile img4.jpg",
+    name: "Sean Walsh",
+    age: "34 years",
+  },
+  {
+    id: 5,
+    img: "/profile img5.jpg",
+    name: "Lola Gardner",
+    age: "29 years",
+  },
 ];
 
 const BirthdayList = () => {
   return (
-    <div className="p-5 bg-white">
-      <h1>birthdays today</h1>
+    <div className="p-5 bg-white flex flex-col gap-4">
+      <h3 className="font-normal text-3xl tracking-wider mb-4">
+        {birthdayPeople.length} Birthdays Today
+      </h3>
 
-      <div>
-        {birthdayPeople.map(({ id, name, age }) => (
-          <BirthdayListItem id={id} name={name} age={age} />
+      <div className="flex flex-col gap-4">
+        {birthdayPeople.map(({ id, name, age, img }) => (
+          <BirthdayListItem key={id} name={name} age={age} img={img} />
         ))}
       </div>
 
-      <button>Clear All</button>
+      <button className="bg-purple-400 rounded text-white hover:bg-purple-800">
+        Clear All
+      </button>
     </div>
   );
 };
 
 const BirthdayListItem = ({ img, name, age }) => {
   return (
-    <div>
-      <img src={img} alt="" />
+    <div className="flex items-center gap-2">
+      <img className="h-20 w-20 rounded-full" src={img} alt="Profile image" />
       <div>
-        <h2>{name}</h2>
-        <p>{age}</p>
+        <h4 className="font-bold tracking-wider w-112.25">{name}</h4>
+        <h6 className="text-gray-500 ">{age}</h6>
       </div>
     </div>
   );
