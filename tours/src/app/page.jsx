@@ -57,8 +57,10 @@ const CountryTours = () => {
   };
 
   return (
-    <div className="mt-30">
-      <h1 className="mb-10 font-bold text-4xl text-center">Our Tours</h1>
+    <div className="mt-30 flex flex-col items-center">
+      <h1 className="mb-10 font-bold text-4xl border-b-4 w-50 border-green-600 pb-5 text-center">
+        Our Tours
+      </h1>
       <div className="grid grid-cols-3 gap-5">
         {place.map(({ id, image, number, header, desc }) => (
           <OneCountryTour
@@ -79,13 +81,13 @@ const CountryTours = () => {
 const OneCountryTour = ({ image, number, header, desc, onClick, id }) => {
   return (
     <div className="rounded-3xl border">
-      <div>
+      <div className="relative">
         <img
-          className="h-58.5 w-88 rounded-t-3xl relative"
+          className="h-58.5 w-88 rounded-t-3xl"
           src={image}
           alt="Place Image"
         />
-        <p className="absolute right=0 top=0 bg-green-500 text-white">
+        <p className="absolute right-0 top-0 bg-green-500 text-white rounded-tr-3xl p-2">
           {number}
         </p>
       </div>
