@@ -13,6 +13,7 @@ export default function Home() {
 const places = [
   {
     id: 1,
+    state: false,
     image: "/tour-1.jpeg",
     number: "$1,995",
     header: "Best of Paris in 7 Days Tour",
@@ -20,6 +21,7 @@ const places = [
   },
   {
     id: 2,
+    state: false,
     image: "/tour-2.jpeg",
     number: "$3,895",
     header: "Best of Ireland in 14 Days Tour",
@@ -27,6 +29,7 @@ const places = [
   },
   {
     id: 3,
+    state: false,
     image: "/tour-3.jpeg",
     number: "$2,695",
     header: "Best of Salzburg & Vienna in 8 Days Tour",
@@ -34,6 +37,7 @@ const places = [
   },
   {
     id: 4,
+    state: false,
     image: "/tour-4.jpeg",
     number: "$2,095",
     header: "Best of Rome in 7 Days Tour",
@@ -41,6 +45,7 @@ const places = [
   },
   {
     id: 5,
+    state: false,
     image: "/tour-5.jpeg",
     number: "$2,595",
     header: "Best of Poland in 10 Days Tour",
@@ -56,13 +61,21 @@ const CountryTours = () => {
     setPlace(updatePlace);
   };
 
+  const onReset = () => {
+    setPlace(places);
+  };
+
+  const readMoreButton = (id) => {
+    setPlace(place.map((p) => (p.id === id ? { ...p, state: !p.state } : p)));
+  };
+
   return (
     <div className="mt-30 flex flex-col items-center">
       <h1 className="mb-10 font-bold text-4xl border-b-4 w-50 border-green-600 pb-5 text-center">
         Our Tours
       </h1>
       <div className="grid grid-cols-3 gap-5">
-        {place.map(({ id, image, number, header, desc }) => (
+        {place.map(({ id, image, number, header, desc, state }) => (
           <OneCountryTour
             key={id}
             id={id}
@@ -71,14 +84,36 @@ const CountryTours = () => {
             header={header}
             desc={desc}
             onClick={notInterested}
+            readMoreButton={readMoreButton}
+            state={state}
           />
         ))}
       </div>
+      {place.length == 0 && (
+        <div className="flex items-center">
+          <button
+            className="border border-green-400 w-77 rounded-lg text-green-400 text-center"
+            onClick={onReset}
+          >
+            Reset
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-const OneCountryTour = ({ image, number, header, desc, onClick, id }) => {
+const OneCountryTour = ({
+  image,
+  number,
+  header,
+  desc,
+  onClick,
+  id,
+  readMoreButton,
+  state,
+}) => {
+  const shortText = desc.split(" ").slice(0, 30).join(" ");
   return (
     <div className="rounded-3xl border">
       <div className="relative">
@@ -93,7 +128,14 @@ const OneCountryTour = ({ image, number, header, desc, onClick, id }) => {
       </div>
       <div className="flex flex-col w-88 p-5 gap-5">
         <h2 className="text-center font-bold">{header}</h2>
-        <p>{desc}</p>
+        <div>
+          {state ? desc : `${shortText}...`}
+
+          <button onClick={() => readMoreButton(id)} className="text-green-500">
+            {state ? "Show Less" : "Read More"}
+          </button>
+        </div>
+
         <button
           className="border border-green-400 w-77 rounded-lg text-green-400 text-center"
           onClick={() => onClick(id)}
