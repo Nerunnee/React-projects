@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen bg-blue-200">
+    <div className="w-screen h-screen bg-blue-200 flex flex-col justify-center items-center">
       <Questions />
     </div>
   );
@@ -35,18 +35,24 @@ const questionsInfos = [
 
 const Questions = () => {
   const [questions, setQuestions] = useState(questionsInfos);
+
   return (
-    <div>
+    <div className="">
       <h1>Questions</h1>
-      <Question />
+      <div className="flex flex-col gap-8">
+        {questions.map(({ id, question }) => (
+          <Question key={id} question={question} />
+        ))}
+      </div>
     </div>
   );
 };
 
-const Question = () => {
+const Question = ({ question }) => {
   return (
-    <div>
-      <h5></h5>
+    <div className="w-167 flex justify-between bg-white py-6 px-4 shadow-2xl">
+      <h5>{question}</h5>
+      <button>+</button>
     </div>
   );
 };
