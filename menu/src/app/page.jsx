@@ -13,6 +13,7 @@ export default function Home() {
 const menu = [
   {
     id: 1,
+    category: "Breakfast",
     image: "/item-1.jpeg",
     name: "Buttermilk Pancakes",
     price: "$15.99",
@@ -20,6 +21,7 @@ const menu = [
   },
   {
     id: 2,
+    category: "Dinner",
     image: "/item-2.jpeg",
     name: "Diner Double",
     price: "$13.99",
@@ -27,6 +29,7 @@ const menu = [
   },
   {
     id: 3,
+    category: "Shakes",
     image: "/item-3.jpeg",
     name: "Godzilla Milkshake",
     price: "$6.99",
@@ -34,6 +37,7 @@ const menu = [
   },
   {
     id: 4,
+    category: "Breakfast",
     image: "/item-4.jpeg",
     name: "Country Delight",
     price: "$20.99",
@@ -41,6 +45,7 @@ const menu = [
   },
   {
     id: 5,
+    category: "Dinner",
     image: "/item-5.jpeg",
     name: "Egg Attack",
     price: "$22.99",
@@ -48,6 +53,7 @@ const menu = [
   },
   {
     id: 6,
+    category: "Shakes",
     image: "/item-6.jpeg",
     name: "Oreo Dream",
     price: "$18.99",
@@ -55,6 +61,7 @@ const menu = [
   },
   {
     id: 7,
+    category: "Breakfast",
     image: "/item-7.jpeg",
     name: "Bacon Overflow",
     price: "$8.99",
@@ -62,6 +69,7 @@ const menu = [
   },
   {
     id: 8,
+    category: "Dinner",
     image: "/item-8.jpeg",
     name: "American Classic",
     price: "$12.99",
@@ -69,6 +77,7 @@ const menu = [
   },
   {
     id: 9,
+    category: "Shakes",
     image: "/item-9.jpeg",
     name: "Quarantine Buddy",
     price: "$16.99",
@@ -78,10 +87,21 @@ const menu = [
 
 const Food = () => {
   const [food, setFood] = useState(menu);
+  const [category, setCategory] = useState("all");
 
   const allFood = () => {
     setFood(food);
     console.log(food);
+  };
+
+  const breakfast = () => {
+    const selectedBreakfast = food.filter((item) => {
+      if (item.category === "Breakfast") {
+      }
+    });
+    setFood(selectedBreakfast);
+
+    console.log(selectedBreakfast);
   };
 
   return (
@@ -95,7 +115,10 @@ const Food = () => {
         >
           All
         </button>
-        <button className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300">
+        <button
+          className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300"
+          onClick={breakfast}
+        >
           Breakfast
         </button>
         <button className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300">
@@ -107,13 +130,14 @@ const Food = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-8">
-        {food.map(({ image, name, price, desc, id }) => (
+        {food.map(({ image, name, price, desc, id, category }) => (
           <FoodItem
             key={id}
             image={image}
             name={name}
             price={price}
             desc={desc}
+            category={category}
           />
         ))}
       </div>
