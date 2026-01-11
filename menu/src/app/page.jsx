@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center min-h-screen bg-gray-200">
       <Food />
     </div>
   );
@@ -85,48 +85,45 @@ const menu = [
   },
 ];
 
+const categories = ["All", "Breakfast", "Dinner", "Shakes"];
+
 const Food = () => {
   const [food, setFood] = useState(menu);
-  const [category, setCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const allFood = () => {
-    setFood(food);
-    console.log(food);
-  };
+  const selectedFood = (category) => {
+    setSelectedCategory(category);
 
-  const breakfast = () => {
-    const selectedBreakfast = food.filter((item) => {
-      if (item.category === "Breakfast") {
-      }
-    });
-    setFood(selectedBreakfast);
-
-    console.log(selectedBreakfast);
+    if (category === "All") {
+      setFood(menu);
+    } else {
+      const filteredCategory = menu.filter(
+        (item) => item.category === category
+      );
+      setFood(filteredCategory);
+    }
   };
 
   return (
     <div>
-      <h2 className="text-center ">Our Menu</h2>
+      <div className="mt-20 flex flex-col items-center gap-4">
+        <h2 className="text-center text-5xl">Our Menu</h2>
+        <p className="w-30 border-3 border-teal-500 rounded-md"></p>
+      </div>
 
       <div className="flex gap-4 justify-center mt-8 mb-16">
-        <button
-          className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300"
-          onClick={allFood}
-        >
-          All
-        </button>
-        <button
-          className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300"
-          onClick={breakfast}
-        >
-          Breakfast
-        </button>
-        <button className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300">
-          Lunch
-        </button>
-        <button className="py-1.5 px-3 bg-orange-400 rounded-md text-white hover:bg-amber-300">
-          Shakes
-        </button>
+        {categories.map((cat) => (
+          <button
+            className={`px-3 py-1.5 rounded-md text-white hover:bg-teal-500 ${
+              selectedCategory === cat ? "bg-teal-500" : "bg-sky-900"
+            }
+             `}
+            onClick={() => selectedFood(cat)}
+            key={cat}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       <div className="grid grid-cols-3 gap-8">
@@ -147,7 +144,7 @@ const Food = () => {
 
 const FoodItem = ({ image, name, price, desc }) => {
   return (
-    <div className="w-92 flex flex-col gap-4">
+    <div className="w-92 flex flex-col gap-4 bg-white rounded-t-md">
       <img
         src={image}
         alt={name}
@@ -155,9 +152,9 @@ const FoodItem = ({ image, name, price, desc }) => {
       />
 
       <div className="flex flex-col gap-5 p-6">
-        <div className="flex justify-between">
-          <h5>{name}</h5>
-          <p>{price}</p>
+        <div className="flex justify-between items-center">
+          <h5 className="text-xl font-bold">{name}</h5>
+          <p className="bg-sky-900 text-white rounded-md px-3">{price}</p>
         </div>
 
         <p>{desc}</p>
