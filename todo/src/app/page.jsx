@@ -1,5 +1,10 @@
 "use client";
 
+import { Buttons } from "./_components/Buttons";
+import { InputText } from "./_components/InputText";
+import { TaskLists } from "./_components/TaskLists";
+import { ClearAll } from "./_components/ClearAll";
+
 const { useState } = require("react");
 
 const Home = () => {
@@ -29,7 +34,6 @@ const TodoList = () => {
     setValue(event.target.value);
   };
 
-  console.log(tasks);
   const AddTask = () => {
     const task = {
       id: tasks.length,
@@ -62,6 +66,10 @@ const TodoList = () => {
       }
     });
 
+    const okTask = confirm("Are you sure you want to delete this task?");
+
+    if (!okTask) return;
+
     setTasks(remainingTask);
   };
 
@@ -73,84 +81,63 @@ const TodoList = () => {
 
   const clearCompleted = () => {
     setTasks(tasks.filter((task) => !task.checked));
+
+    const clearAll = confirm(
+      "Are you sure you want to clear all completed tasks?",
+    );
+
+    if (!clearAll) return;
   };
 
   return (
-    <div className="w-94.25 py-6 px-4 bg-white rounded-md flex flex-col items-center gap-8">
+    <div className="py-6 px-4 bg-white rounded-md flex flex-col items-center gap-8">
       <div className="flex flex-col gap-5">
         <h1 className="text-2xl text-center ">To-Do List</h1>
 
-        <div className="flex gap-1.5">
-          <input
-            type="text"
-            placeholder="Add a new task..."
-            className="border rounded-md py-2 px-4 w-70"
-            value={value}
-            onChange={() => HandleChange(event)}
-          />
-
-          <button
-            className="py-2 px-4 rounded-md bg-blue-500 text-white"
-            onClick={AddTask}
-          >
-            Add
-          </button>
-        </div>
+        <InputText
+          value={value}
+          AddTask={AddTask}
+          HandleChange={HandleChange}
+        />
 
         <div className="flex gap-2">
           {buttons.map((filter, index) => (
-            <button
+            <Buttons
+              onChangeFilter={onChangeFilter}
+              filter={filter}
               key={index}
-              className="rounded-md bg-gray-200 py-1 px-3 hover:bg-blue-500"
-              onClick={() => onChangeFilter(filter)}
-            >
-              {filter}
-            </button>
+              selectedButton={selectedButton}
+            />
           ))}
         </div>
 
-        <div>
-          {filteredTasks.map((task, id) => {
-            return (
-              <div
-                key={id}
-                className="flex justify-between items-center w-86.25 h-15.5 bg-gray-200 rounded-md p-4 mb-5"
-              >
-                <div className="flex gap-2.5 items-center">
-                  <input
-                    type="checkbox"
-                    name="checkbox"
-                    checked={task.checked}
-                    onChange={() => toggleChecked(task.id)}
-                    className={`w-5 h-5 ${task.checked && "bg-blue-500"}`}
-                  />
-                  <p className={`${task.checked && "line-through"}`}>
-                    {task.text}
-                  </p>
-                </div>
+        {filteredTasks.length === 0 ? (
+          <div className="text-gray-500 text-center">
+            No Tasks yet. Add one above!
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            {filteredTasks.map((task) => (
+              <TaskLists
+                task={task}
+                deleteTask={deleteTask}
+                toggleChecked={toggleChecked}
+                key={task.id}
+              />
+            ))}
+          </div>
+        )}
 
-                <button
-                  className="text-red-600 bg-red-200 py-1.5 px-3 rounded-md"
-                  onClick={() => deleteTask(task.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            );
-          })}
-        </div>
-
-        <div>
-          <p>
-            {completedCount} of {tasks.length} tasks completed
-          </p>
-          <button onClick={() => clearCompleted()} className="text-red-600">
-            Clear completed
-          </button>
-        </div>
+        <ClearAll
+          clearCompleted={clearCompleted}
+          tasks={tasks}
+          completedCount={completedCount}
+        />
       </div>
 
-      <p>Powered by Pinecone academy</p>
+      <p className="text-gray-500 text-sm">
+        Powered by <span className="text-blue-500">Pinecone academy</span>
+      </p>
     </div>
   );
 };
