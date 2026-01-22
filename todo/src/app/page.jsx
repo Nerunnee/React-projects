@@ -34,9 +34,11 @@ const TodoList = () => {
     setValue(event.target.value);
   };
 
+  console.log(tasks);
+
   const AddTask = () => {
     const task = {
-      id: tasks.length,
+      id: Date.now(),
       text: value,
       checked: false,
     };
@@ -80,13 +82,13 @@ const TodoList = () => {
   const completedCount = tasks.filter((task) => task.checked).length;
 
   const clearCompleted = () => {
-    setTasks(tasks.filter((task) => !task.checked));
-
     const clearAll = confirm(
       "Are you sure you want to clear all completed tasks?",
     );
 
     if (!clearAll) return;
+
+    setTasks(tasks.filter((task) => !task.checked));
   };
 
   return (
