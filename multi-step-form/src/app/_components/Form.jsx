@@ -3,9 +3,6 @@ import { InputContainer } from "./InputContainer";
 import { Button } from "./Button";
 
 export const Form = () => {
-  const steps = [FormUsersName, FormUsersSecret];
-  const [step, setStep] = useState(1);
-
   const formsContainer = {
     firstName: "",
     lastName: "",
@@ -18,6 +15,7 @@ export const Form = () => {
 
   const [forms, setForms] = useState(formsContainer);
   const [errors, setErrors] = useState(formsContainer);
+  const [step, setStep] = useState(1);
 
   const formsValue = (event) => {
     setForms({ ...forms, [event.target.name]: event.target.value });
@@ -26,30 +24,42 @@ export const Form = () => {
 
   const handleError = () => {
     const errorValue = {};
-    if (forms.firstName === "") {
-      errorValue.firstName = "Neree oruulna uu";
+
+    if (step === 1) {
+      if (forms.firstName === "") {
+        errorValue.firstName =
+          "First name cannot contain special characters or numbers.";
+      }
+      if (forms.lastName === "") {
+        errorValue.lastName =
+          "Last name cannot contain special characters or numbers.";
+      }
+      if (forms.userName === "") {
+        errorValue.userName =
+          "This username is already taken. Please choose another one.";
+      }
     }
-    if (forms.lastName === "") {
-      errorValue.lastName = "Neree oruulna uu";
-    }
-    if (forms.userName === "") {
-      errorValue.userName = "Neree oruulna uu";
-    }
-    if (forms.eMail === "") {
-      errorValue.eMail = "eMail oruulna uu";
-    }
-    if (forms.phoneNumber === "") {
-      errorValue.phoneNumber = "utas oruulna uu";
-    }
-    if (forms.password === "") {
-      errorValue.password = "eMail oruulna uu";
-    }
-    if (forms.confirmPassword === "") {
-      errorValue.confirmPassword = "eMail oruulna uu";
+
+    if (step === 2) {
+      if (forms.eMail === "") {
+        errorValue.eMail = "Please provise a viled email address.";
+      }
+      if (forms.phoneNumber === "") {
+        errorValue.phoneNumber = "Please enter a valid phone number.";
+      }
+      if (forms.password === "") {
+        errorValue.password = "Password must include letters and numbers.";
+      }
+      if (forms.confirmPassword === "") {
+        errorValue.confirmPassword =
+          "Passwords do not match. Please try again.";
+      }
     }
 
     setErrors(errorValue);
-    handleNextStep();
+    if (Object.keys(errorValue).length === 0) {
+      handleNextStep();
+    }
   };
 
   const handleNextStep = () => {
@@ -76,7 +86,7 @@ export const Form = () => {
           />
         )}
 
-        {step === 1 && (
+        {step === 2 && (
           <FormUsersSecret
             forms={forms}
             formsValue={formsValue}
