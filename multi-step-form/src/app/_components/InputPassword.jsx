@@ -17,7 +17,7 @@ export const InputPassword = ({
         value={value}
         name={formsContainer}
       />
-      <p className="text-red-500">{error}</p>
+      <p className="text-red-500 text-xs">{error}</p>
     </div>
   );
 };

@@ -116,9 +116,13 @@ export const Form = () => {
     <div className="bg-white p-8 rounded-md">
       <div className="flex flex-col gap-2 mb-7">
         <img className="w-15 h-15" src="/pinecone.svg" alt="Pinecone Logo" />
-        <p className="text-2xl font-semibold">Join Us! 😎</p>
+        <p className="text-2xl font-semibold">
+          {step === 4 ? "You're All Set 🔥 " : "Join Us! 😎"}
+        </p>
         <p className="text-lg font-normal text-gray-500">
-          Please provide all current information accurately.
+          {step === 4
+            ? "We have received your submission. Thank you!"
+            : "Please provide all current information accurately."}
         </p>
       </div>
 
