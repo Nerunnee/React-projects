@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { InputContainer } from "./InputContainer";
-import { Button } from "./Button";
+import { FormUsersName } from "./FormUsersName";
 
 export const Form = () => {
   const formsContainer = {
@@ -94,93 +93,6 @@ export const Form = () => {
             handleError={handleError}
           />
         )}
-      </div>
-    </div>
-  );
-};
-
-const FormUsersName = ({ forms, formsValue, error, handleError }) => {
-  return (
-    <div>
-      <div className="mb-40.5">
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.firstName}
-          label="First name"
-          formsContainer="firstName"
-          error={error.firstName}
-        />
-
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.lastName}
-          label="Last name"
-          formsContainer="lastName"
-          error={error.lastName}
-        />
-
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.userName}
-          label="User name"
-          formsContainer="userName"
-          error={error.userName}
-        />
-      </div>
-
-      <div>
-        <Button handleError={handleError} />
-      </div>
-    </div>
-  );
-};
-
-const FormUsersSecret = ({ forms, formsValue, error, handleError }) => {
-  return (
-    <div>
-      <div className="mb-40.5">
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.eMail}
-          label="Email"
-          formsContainer="eMail"
-          error={error.eMail}
-        />
-
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.phoneNumber}
-          label="Phone number"
-          formsContainer="phoneNumber"
-          error={error.phoneNumber}
-        />
-
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.password}
-          label="Password"
-          formsContainer="password"
-          error={error.password}
-        />
-
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
-          value={forms.confirmPassword}
-          label="Confirm password"
-          formsContainer="confirmPassword"
-          error={error.confirmPassword}
-        />
-      </div>
-
-      <div>
-        <Button handleError={handleError} />
       </div>
     </div>
   );
