@@ -1,5 +1,5 @@
 import { NextButton } from "./NextButton";
-import { InputContainer } from "./InputContainer";
+import { InputText } from "./InputText";
 
 export const FormUsersName = ({
   forms,
@@ -11,30 +11,30 @@ export const FormUsersName = ({
   return (
     <div>
       <div className="mb-40.5">
-        <InputContainer
-          forms={forms}
+        <InputText
           formsValue={formsValue}
           value={forms.firstName}
           label="First name"
           formsContainer="firstName"
+          placeholder="Your first name"
           error={error.firstName}
         />
 
-        <InputContainer
-          forms={forms}
-          formsValue={formsValue}
+        <InputText
           value={forms.lastName}
+          formsValue={formsValue}
           label="Last name"
           formsContainer="lastName"
+          placeholder="Your last name"
           error={error.lastName}
         />
 
-        <InputContainer
-          forms={forms}
+        <InputText
           formsValue={formsValue}
           value={forms.userName}
           label="User name"
           formsContainer="userName"
+          placeholder="Your username"
           error={error.userName}
         />
       </div>
