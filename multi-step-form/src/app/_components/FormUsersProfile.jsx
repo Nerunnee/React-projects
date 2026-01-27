@@ -10,6 +10,7 @@ export const FromUsersProfile = ({
   handleError,
   step,
   handleBackStep,
+  required,
 }) => {
   return (
     <div>
@@ -20,6 +21,7 @@ export const FromUsersProfile = ({
           label="Date of birth"
           formsContainer="dateOfBirth"
           error={error.dateOfBirth}
+          required={required}
         />
 
         <InputProfile
@@ -28,6 +30,7 @@ export const FromUsersProfile = ({
           label="Profile image"
           formsContainer="profileImage"
           error={error.profileImage}
+          required={required}
         />
       </div>
 

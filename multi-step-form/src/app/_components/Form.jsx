@@ -134,6 +134,7 @@ export const Form = () => {
             error={errors}
             handleError={handleError}
             step={step}
+            required={true}
           />
         )}
 
@@ -145,6 +146,7 @@ export const Form = () => {
             handleError={handleError}
             step={step}
             handleBackStep={handleBackStep}
+            required={true}
           />
         )}
 
@@ -156,6 +158,7 @@ export const Form = () => {
             handleError={handleError}
             step={step}
             handleBackStep={handleBackStep}
+            required={true}
           />
         )}
       </div>

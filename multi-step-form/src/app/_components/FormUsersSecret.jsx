@@ -10,6 +10,7 @@ export const FormUsersSecret = ({
   handleError,
   step,
   handleBackStep,
+  required,
 }) => {
   return (
     <div>
@@ -21,6 +22,7 @@ export const FormUsersSecret = ({
           formsContainer="eMail"
           placeholder="Your email"
           error={error.eMail}
+          required={required}
         />
 
         <InputText
@@ -30,6 +32,7 @@ export const FormUsersSecret = ({
           formsContainer="phoneNumber"
           placeholder="Your phone number"
           error={error.phoneNumber}
+          required={required}
         />
 
         <InputPassword
@@ -39,6 +42,7 @@ export const FormUsersSecret = ({
           formsContainer="password"
           placeholder="Your password"
           error={error.password}
+          required={required}
         />
 
         <InputPassword
@@ -48,6 +52,7 @@ export const FormUsersSecret = ({
           formsContainer="confirmPassword"
           placeholder="Confirm password"
           error={error.confirmPassword}
+          required={required}
         />
       </div>
 

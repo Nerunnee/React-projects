@@ -7,6 +7,7 @@ export const FormUsersName = ({
   error,
   handleError,
   step,
+  required,
 }) => {
   return (
     <div>
@@ -18,6 +19,7 @@ export const FormUsersName = ({
           formsContainer="firstName"
           placeholder="Your first name"
           error={error.firstName}
+          required={required}
         />
 
         <InputText
@@ -27,6 +29,7 @@ export const FormUsersName = ({
           formsContainer="lastName"
           placeholder="Your last name"
           error={error.lastName}
+          required={required}
         />
 
         <InputText
@@ -36,6 +39,7 @@ export const FormUsersName = ({
           formsContainer="userName"
           placeholder="Your username"
           error={error.userName}
+          required={required}
         />
       </div>
 
