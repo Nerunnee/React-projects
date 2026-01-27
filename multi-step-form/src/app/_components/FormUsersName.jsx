@@ -1,7 +1,13 @@
-import { Button } from "./Button";
+import { NextButton } from "./NextButton";
 import { InputContainer } from "./InputContainer";
 
-export const FormUsersName = ({ forms, formsValue, error, handleError }) => {
+export const FormUsersName = ({
+  forms,
+  formsValue,
+  error,
+  handleError,
+  step,
+}) => {
   return (
     <div>
       <div className="mb-40.5">
@@ -34,7 +40,7 @@ export const FormUsersName = ({ forms, formsValue, error, handleError }) => {
       </div>
 
       <div>
-        <Button handleError={handleError} />
+        <NextButton handleError={handleError} step={step} />
       </div>
     </div>
   );

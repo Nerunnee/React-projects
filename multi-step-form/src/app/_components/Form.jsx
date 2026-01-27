@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FormUsersName } from "./FormUsersName";
+import { FormUsersSecret } from "./FormUsersSecret";
 
 export const Form = () => {
   const formsContainer = {
@@ -65,6 +66,10 @@ export const Form = () => {
     setStep(step + 1);
   };
 
+  const handleBackStep = () => {
+    setStep(step - 1);
+  };
+
   return (
     <div className="bg-white p-8 rounded-md">
       <div className="flex flex-col gap-2 mb-7">
@@ -82,6 +87,7 @@ export const Form = () => {
             formsValue={formsValue}
             error={errors}
             handleError={handleError}
+            step={step}
           />
         )}
 
@@ -91,6 +97,7 @@ export const Form = () => {
             formsValue={formsValue}
             error={errors}
             handleError={handleError}
+            step={step}
           />
         )}
       </div>
