@@ -23,8 +23,6 @@ export const Form = () => {
 
   const fileUploadRef = useRef();
 
-  console.log(forms);
-
   const formsValue = (event) => {
     setForms({ ...forms, [event.target.name]: event.target.value });
     setErrors({ ...errors, [event.target.name]: "" });
