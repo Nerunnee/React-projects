@@ -33,7 +33,7 @@ export const InputProfile = ({
           name={formsContainer}
         />
       </div>
-      <p className="text-red-500 text-xs">{imgUrl ? "" : error}</p>
+      <p className="text-red-500 text-xs">{error}</p>
     </div>
   );
 };

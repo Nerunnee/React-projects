@@ -23,6 +23,8 @@ export const Form = () => {
 
   const fileUploadRef = useRef();
 
+  console.log(forms);
+
   const formsValue = (event) => {
     setForms({ ...forms, [event.target.name]: event.target.value });
     setErrors({ ...errors, [event.target.name]: "" });
@@ -120,6 +122,8 @@ export const Form = () => {
   const uploadImageDisplay = () => {
     const imgFile = fileUploadRef.current.files[0];
     setImgUrl(URL.createObjectURL(imgFile));
+
+    setForms({ ...forms, profileImage: imgFile });
   };
 
   return (
