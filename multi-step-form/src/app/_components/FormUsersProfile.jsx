@@ -11,6 +11,10 @@ export const FromUsersProfile = ({
   step,
   handleBackStep,
   required,
+  imgUrl,
+  handleImageUpload,
+  uploadImageDisplay,
+  fileUploadRef,
 }) => {
   return (
     <div>
@@ -25,12 +29,14 @@ export const FromUsersProfile = ({
         />
 
         <InputProfile
-          formsValue={formsValue}
-          value={forms.profileImage}
+          fileUploadRef={fileUploadRef}
           label="Profile image"
           formsContainer="profileImage"
           error={error.profileImage}
           required={required}
+          handleImageUpload={handleImageUpload}
+          uploadImageDisplay={uploadImageDisplay}
+          imgUrl={imgUrl}
         />
       </div>
 

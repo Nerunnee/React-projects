@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FormUsersName } from "./FormUsersName";
 import { FormUsersSecret } from "./FormUsersSecret";
 import { FromUsersProfile } from "./FormUsersProfile";
@@ -19,14 +19,14 @@ export const Form = () => {
   const [forms, setForms] = useState(formsContainer);
   const [errors, setErrors] = useState(formsContainer);
   const [step, setStep] = useState(1);
+  const [imgUrl, setImgUrl] = useState(null);
 
-  console.log(forms);
+  const fileUploadRef = useRef();
 
   const formsValue = (event) => {
     setForms({ ...forms, [event.target.name]: event.target.value });
     setErrors({ ...errors, [event.target.name]: "" });
   };
-  console.log(forms);
 
   const handleError = () => {
     const errorValue = {};
@@ -112,6 +112,16 @@ export const Form = () => {
     setStep(step - 1);
   };
 
+  const handleImageUpload = (event) => {
+    event.preventDefault();
+    fileUploadRef.current.click();
+  };
+
+  const uploadImageDisplay = () => {
+    const imgFile = fileUploadRef.current.files[0];
+    setImgUrl(URL.createObjectURL(imgFile));
+  };
+
   return (
     <div className="bg-white p-8 rounded-md">
       <div className="flex flex-col gap-2 mb-7">
@@ -159,6 +169,10 @@ export const Form = () => {
             step={step}
             handleBackStep={handleBackStep}
             required={true}
+            imgUrl={imgUrl}
+            handleImageUpload={handleImageUpload}
+            uploadImageDisplay={uploadImageDisplay}
+            fileUploadRef={fileUploadRef}
           />
         )}
       </div>
