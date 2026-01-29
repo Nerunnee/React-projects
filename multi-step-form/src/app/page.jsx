@@ -1,6 +1,7 @@
 "use client";
 
 import { Form } from "./_components/Form";
+import { motion } from "motion/react";
 
 export default function Home() {
   return (

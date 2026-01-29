@@ -15,6 +15,7 @@ export const FromUsersProfile = ({
   handleImageUpload,
   uploadImageDisplay,
   fileUploadRef,
+  handleNextStep,
 }) => {
   return (
     <div>
@@ -45,7 +46,7 @@ export const FromUsersProfile = ({
           <BackButton handleBackStep={handleBackStep} />
         </div>
         <div className="w-70">
-          <NextButton handleError={handleError} step={step} />
+          <NextButton handleError={handleNextStep} step={step} />
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ export const FormUsersSecret = ({
   step,
   handleBackStep,
   required,
+  handleNextStep,
 }) => {
   return (
     <div>
@@ -61,7 +62,7 @@ export const FormUsersSecret = ({
           <BackButton handleBackStep={handleBackStep} />
         </div>
         <div className="w-70">
-          <NextButton handleError={handleError} step={step} />
+          <NextButton handleError={handleNextStep} step={step} />
         </div>
       </div>
     </div>
