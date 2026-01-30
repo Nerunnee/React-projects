@@ -1,22 +1,16 @@
 import { NextButton } from "./NextButton";
 import { InputText } from "./InputText";
-import { motion } from "motion/react";
 
 export const FormUsersName = ({
   forms,
   formsValue,
   error,
-  handleError,
   step,
   required,
   handleNextStep,
 }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, right: 0 }}
-      animate={{ opacity: 10, right: 10 }}
-      transition={{ duration: 3 }}
-    >
+    <div>
       <div className="mb-40.5">
         <InputText
           formsValue={formsValue}
@@ -52,6 +46,6 @@ export const FormUsersName = ({
       <div>
         <NextButton handleError={handleNextStep} step={step} />
       </div>
-    </motion.div>
+    </div>
   );
 };

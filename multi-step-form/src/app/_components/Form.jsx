@@ -4,6 +4,7 @@ import { FormUsersName } from "./FormUsersName";
 import { FormUsersSecret } from "./FormUsersSecret";
 import { FromUsersProfile } from "./FormUsersProfile";
 import { useHandleError } from "./HandleError";
+import { AnimatePresence, motion } from "motion/react";
 
 export const Form = () => {
   const formsContainer = {
@@ -23,6 +24,7 @@ export const Form = () => {
   const [step, setStep] = useState(1);
   const [imgUrl, setImgUrl] = useState(null);
   const { errorValue } = useHandleError(step, forms);
+
   const fileUploadRef = useRef();
 
   const formsValue = (event) => {
@@ -56,60 +58,73 @@ export const Form = () => {
     setForms({ ...forms, profileImage: imgFile });
   };
 
+  const deleteImage = () => {
+    setImgUrl(null);
+  };
+
   return (
-    <div className="bg-white p-8 rounded-md">
-      <div className="flex flex-col gap-2 mb-7">
-        <img className="w-15 h-15" src="/pinecone.svg" alt="Pinecone Logo" />
-        <p className="text-2xl font-semibold">
-          {step === 4 ? "You're All Set 🔥 " : "Join Us! 😎"}
-        </p>
-        <p className="text-lg font-normal text-gray-500">
-          {step === 4
-            ? "We have received your submission. Thank you!"
-            : "Please provide all current information accurately."}
-        </p>
-      </div>
+    <AnimatePresence>
+      <motion.div
+        key={step}
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ ease: "easeInOut", duration: 0.5 }}
+        className="bg-white p-8 rounded-md"
+      >
+        <div className="flex flex-col gap-2 mb-7">
+          <img className="w-15 h-15" src="/pinecone.svg" alt="Pinecone Logo" />
+          <p className="text-2xl font-semibold">
+            {step === 4 ? "You're All Set 🔥 " : "Join Us! 😎"}
+          </p>
+          <p className="text-lg font-normal text-gray-500">
+            {step === 4
+              ? "We have received your submission. Thank you!"
+              : "Please provide all current information accurately."}
+          </p>
+        </div>
 
-      <div>
-        {step === 1 && (
-          <FormUsersName
-            forms={forms}
-            formsValue={formsValue}
-            error={errors}
-            step={step}
-            required={true}
-            handleNextStep={handleNextStep}
-          />
-        )}
+        <div>
+          {step === 1 && (
+            <FormUsersName
+              forms={forms}
+              formsValue={formsValue}
+              error={errors}
+              step={step}
+              required={true}
+              handleNextStep={handleNextStep}
+            />
+          )}
 
-        {step === 2 && (
-          <FormUsersSecret
-            forms={forms}
-            formsValue={formsValue}
-            error={errors}
-            step={step}
-            handleBackStep={handleBackStep}
-            required={true}
-            handleNextStep={handleNextStep}
-          />
-        )}
+          {step === 2 && (
+            <FormUsersSecret
+              forms={forms}
+              formsValue={formsValue}
+              error={errors}
+              step={step}
+              handleBackStep={handleBackStep}
+              required={true}
+              handleNextStep={handleNextStep}
+            />
+          )}
 
-        {step === 3 && (
-          <FromUsersProfile
-            forms={forms}
-            formsValue={formsValue}
-            error={errors}
-            step={step}
-            handleBackStep={handleBackStep}
-            required={true}
-            imgUrl={imgUrl}
-            handleImageUpload={handleImageUpload}
-            uploadImageDisplay={uploadImageDisplay}
-            fileUploadRef={fileUploadRef}
-            handleNextStep={handleNextStep}
-          />
-        )}
-      </div>
-    </div>
+          {step === 3 && (
+            <FromUsersProfile
+              forms={forms}
+              formsValue={formsValue}
+              error={errors}
+              step={step}
+              handleBackStep={handleBackStep}
+              required={true}
+              imgUrl={imgUrl}
+              handleImageUpload={handleImageUpload}
+              uploadImageDisplay={uploadImageDisplay}
+              fileUploadRef={fileUploadRef}
+              handleNextStep={handleNextStep}
+              deleteImage={deleteImage}
+            />
+          )}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };

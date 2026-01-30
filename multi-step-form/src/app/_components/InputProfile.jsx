@@ -7,6 +7,7 @@ export const InputProfile = ({
   imgUrl,
   fileUploadRef,
   handleImageUpload,
+  deleteImage,
 }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -15,7 +16,7 @@ export const InputProfile = ({
         {required && <p className="text-red-500 mt-1 font-extrabold">*</p>}
       </div>
 
-      <div className="flex items-center w-104 h-45 bg-gray-100 justify-center">
+      <div className="flex items-center w-104 h-45 bg-gray-100 justify-center relative">
         {imgUrl && (
           <img
             onClick={handleImageUpload}
@@ -32,6 +33,12 @@ export const InputProfile = ({
           onChange={uploadImageDisplay}
           name={formsContainer}
         />
+        <p
+          className="absolute top-0 right-0 bg-black text-white p-1 mr-2 mt-2 rounded-full w-6 h-6 flex justify-center items-center"
+          onClick={deleteImage}
+        >
+          x
+        </p>
       </div>
       <p className="text-red-500 text-xs">{error}</p>
     </div>

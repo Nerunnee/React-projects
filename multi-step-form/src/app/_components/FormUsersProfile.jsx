@@ -7,7 +7,6 @@ export const FromUsersProfile = ({
   forms,
   formsValue,
   error,
-  handleError,
   step,
   handleBackStep,
   required,
@@ -16,6 +15,7 @@ export const FromUsersProfile = ({
   uploadImageDisplay,
   fileUploadRef,
   handleNextStep,
+  deleteImage,
 }) => {
   return (
     <div>
@@ -38,6 +38,7 @@ export const FromUsersProfile = ({
           handleImageUpload={handleImageUpload}
           uploadImageDisplay={uploadImageDisplay}
           imgUrl={imgUrl}
+          deleteImage={deleteImage}
         />
       </div>
 

@@ -7,7 +7,6 @@ export const FormUsersSecret = ({
   forms,
   formsValue,
   error,
-  handleError,
   step,
   handleBackStep,
   required,
